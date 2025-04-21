@@ -19,7 +19,11 @@ export function Toaster() {
             <div className="grid gap-1">
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
-                <ToastDescription>{description}</ToastDescription>
+                <ToastDescription>
+                  {typeof description === 'string' && description.includes('Invalid credentials') 
+                    ? 'Invalid email or password'
+                    : description}
+                </ToastDescription>
               )}
             </div>
             {action}
