@@ -95,7 +95,12 @@ export class MemStorage implements IStorage {
   
   async createUser(userData: InsertUser): Promise<User> {
     const id = this.userIdCounter++;
-    const user: User = { id, ...userData };
+    const user: User = { 
+      id, 
+      ...userData,
+      isAdmin: userData.isAdmin || false,
+      points: userData.points || 500 // Default points for new users
+    };
     this.users.set(id, user);
     
     // Create an empty cart for the user
@@ -322,10 +327,11 @@ export class MemStorage implements IStorage {
     // Create admin user
     const adminUser: InsertUser = {
       username: "admin@campus.edu",
-      password: "$2b$10$RKUIiHmjxSoVrGgAYny3DO.njIqM4P3IwWJb9ACbcKlHSvs2FoLG6", // password: admin123
+      password: "5a50e9dd2eeef3fb05d3cb0fc6ff51d7a1fdcfdddb7b9f29ccee3a4ec5aa112c.3f03c3e8dca2e58cba5831dcc3ecac0d", // password: admin123
       firstName: "Admin",
       lastName: "User",
-      isAdmin: true
+      isAdmin: true,
+      points: 1000
     };
     await this.createUser(adminUser);
     
