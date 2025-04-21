@@ -19,6 +19,7 @@ export const insertUserSchema = createInsertSchema(users).pick({
   firstName: true,
   lastName: true,
   isAdmin: true,
+  points: true,
 });
 
 // Meal schema

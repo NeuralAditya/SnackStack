@@ -327,7 +327,7 @@ export class MemStorage implements IStorage {
     // Create admin user
     const adminUser: InsertUser = {
       username: "admin@campus.edu",
-      password: "5a50e9dd2eeef3fb05d3cb0fc6ff51d7a1fdcfdddb7b9f29ccee3a4ec5aa112c.3f03c3e8dca2e58cba5831dcc3ecac0d", // password: admin123
+      password: "9f06c79c862870a7d5c299e77fcfc5667e3733f788cf092dccc1cfc94a72ba19990ba47fc43bb457dcb80038e64d22860c776dfc95e0d8f3a17c7bc8b80a26c9.69ae10b0cccb84808e7b35eefa9cc106", // password: admin123
       firstName: "Admin",
       lastName: "User",
       isAdmin: true,
