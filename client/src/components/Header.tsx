@@ -57,7 +57,7 @@ export default function Header({ searchQuery = "", onSearchChange = () => {} }: 
             <MdRestaurant className="text-primary text-3xl mr-2" />
             <span className="font-bold text-xl">SnackStack</span>
           </Link>
-          {user && (
+          {user?.points !== undefined && (
             <Badge variant="points" className="hidden md:flex items-center px-3 py-1 rounded-full">
               <CreditCard className="h-4 w-4 mr-1" />
               <span className="font-medium text-sm">{user.points} points</span>

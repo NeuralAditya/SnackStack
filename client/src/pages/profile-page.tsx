@@ -257,14 +257,7 @@ export default function ProfilePage() {
                               <TableCell>{order.totalPoints}</TableCell>
                               <TableCell>{order.pickupTime}</TableCell>
                               <TableCell>
-                                <Badge variant={
-                                  order.status === 'completed' ? 'success' :
-                                  order.status === 'cancelled' ? 'destructive' :
-                                  order.status === 'ready' ? 'info' :
-                                  'secondary'
-                                }>
-                                  {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
-                                </Badge>
+                                <OrderProgress status={order.status} />
                               </TableCell>
                               <TableCell className="text-right">
                                 <Button variant="ghost" size="sm">

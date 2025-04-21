@@ -69,7 +69,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
 
   const handleQuantityChange = (cartItemId: number, quantity: number) => {
     if (quantity < 1) return;
-    
+
     updateCartItemMutation.mutate(
       { cartItemId, quantity },
       {
@@ -120,27 +120,29 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
 
     try {
       setIsSubmitting(true);
-      
+
       const orderData = {
         pickupTime,
         specialInstructions: specialInstructions || undefined,
       };
-      
+
       const res = await apiRequest("POST", "/api/orders", orderData);
       const order = await res.json();
-      
+
       // Invalidate queries that need updating
       queryClient.invalidateQueries({ queryKey: ["/api/cart"] });
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-      
+      queryClient.invalidateQueries({ queryKey: ["/api/orders"] }); // Added to reflect order history
+
       toast({
         title: "Order Placed!",
-        description: `Your order #${order.id} has been successfully placed.`,
+        description: `Your order #${order.id} has been successfully placed. It is now being prepared.`,
+        duration: 5000,
       });
-      
+
       // Close the modal
       onClose();
-      
+
       // Clear form state
       setPickupTime("As soon as possible");
       setSpecialInstructions("");
@@ -166,7 +168,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
             Your Cart
           </DialogTitle>
         </DialogHeader>
-        
+
         <div className="overflow-y-auto flex-grow py-2">
           {isCartEmpty ? (
             <div className="py-8 text-center">
@@ -227,7 +229,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                   </div>
                 </div>
               ))}
-              
+
               <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                 <h4 className="font-medium mb-2">Order Details</h4>
                 <div className="flex justify-between text-sm mb-1">
@@ -298,7 +300,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
             </>
           )}
         </div>
-        
+
         {!isCartEmpty && (
           <DialogFooter className="flex-col sm:flex-col gap-2 sm:gap-2">
             <div className="flex items-center justify-between w-full mb-2">
@@ -317,7 +319,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                 </div>
               </div>
             </div>
-            
+
             <Button 
               className="w-full"
               onClick={handleCompleteOrder}
