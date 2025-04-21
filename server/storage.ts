@@ -334,7 +334,7 @@ export class MemStorage implements IStorage {
       {
         name: "Healthy Salad Bowl",
         description: "Fresh garden salad with avocado, quinoa, and citrus dressing",
-        imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         pointCost: 120,
         category: "Lunch",
         tags: ["Vegetarian", "Healthy", "Salad"],

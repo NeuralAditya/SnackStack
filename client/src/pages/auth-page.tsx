@@ -349,8 +349,8 @@ export default function AuthPage() {
             </div>
           </div>
           <img 
-            src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-            alt="Campus meals"
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+            alt="Campus restaurant"
             className="mt-8 rounded-xl shadow-lg"
           />
         </div>
