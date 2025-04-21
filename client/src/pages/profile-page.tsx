@@ -37,16 +37,26 @@ import {
 } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 
+// Placeholder -  This function needs to be defined elsewhere in your project.
+const apiRequest = async (method, url) => {
+  const response = await fetch(url, { method });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return response.json();
+};
+
 export default function ProfilePage() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
-  
+
   // Fetch order history
   const { 
     data: orders, 
     isLoading: isLoadingOrders 
   } = useQuery({
-    queryKey: ["/api/orders"],
+    queryKey: ["orders"],
+    queryFn: () => apiRequest("GET", "/api/orders"),
     enabled: !!user,
   });
 
@@ -58,7 +68,7 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-8 flex-grow">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
@@ -67,7 +77,7 @@ export default function ProfilePage() {
                 {getUserInitials()}
               </AvatarFallback>
             </Avatar>
-            
+
             <div className="flex-grow">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
@@ -79,7 +89,7 @@ export default function ProfilePage() {
                   Edit Profile
                 </Button>
               </div>
-              
+
               <div className="mt-4 flex flex-wrap gap-4">
                 <div className="flex items-center">
                   <div className="bg-primary/10 p-2 rounded-full mr-3">
@@ -90,7 +100,7 @@ export default function ProfilePage() {
                     <p className="font-semibold">{user?.points} points</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center">
                   <div className="bg-primary/10 p-2 rounded-full mr-3">
                     <Package className="h-4 w-4 text-primary" />
@@ -103,14 +113,14 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
-          
+
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="mb-6">
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="orders">Order History</TabsTrigger>
               <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="overview">
               <div className="grid gap-6 md:grid-cols-2">
                 <Card>
@@ -132,9 +142,9 @@ export default function ProfilePage() {
                         <h3 className="text-sm font-medium text-gray-500">Account Type</h3>
                         <p>{user?.isAdmin ? "Administrator" : "Student"}</p>
                       </div>
-                      
+
                       <Separator />
-                      
+
                       <div>
                         <h3 className="text-sm font-medium text-gray-500 mb-2">Points Summary</h3>
                         <div className="bg-gray-50 p-4 rounded-lg">
@@ -155,7 +165,7 @@ export default function ProfilePage() {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 <Card>
                   <CardHeader>
                     <CardTitle>Recent Activity</CardTitle>
@@ -192,7 +202,7 @@ export default function ProfilePage() {
                             <ChevronRight className="h-5 w-5 text-gray-400" />
                           </div>
                         ))}
-                        
+
                         <Button variant="outline" className="w-full" onClick={() => setActiveTab("orders")}>
                           View All Orders
                           <ExternalLink className="ml-2 h-4 w-4" />
@@ -214,7 +224,7 @@ export default function ProfilePage() {
                 </Card>
               </div>
             </TabsContent>
-            
+
             <TabsContent value="orders">
               <Card>
                 <CardHeader>
@@ -281,7 +291,7 @@ export default function ProfilePage() {
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="settings">
               <Card>
                 <CardHeader>
@@ -326,16 +336,16 @@ export default function ProfilePage() {
                         Edit Information
                       </Button>
                     </div>
-                    
+
                     <Separator />
-                    
+
                     <div>
                       <h3 className="text-lg font-medium mb-4">Password</h3>
                       <Button variant="outline" disabled>Change Password</Button>
                     </div>
-                    
+
                     <Separator />
-                    
+
                     <div>
                       <h3 className="text-lg font-medium mb-4">Notification Preferences</h3>
                       <div className="space-y-3">
@@ -372,7 +382,7 @@ export default function ProfilePage() {
           </Tabs>
         </div>
       </main>
-      
+
       <BottomNavigation />
     </div>
   );
