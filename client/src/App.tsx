@@ -10,6 +10,7 @@ import AdminPage from "@/pages/admin-page";
 import ProfilePage from "@/pages/profile-page";
 import { ProtectedRoute, AdminRoute } from "./lib/protected-route";
 import { AuthProvider } from "./hooks/use-auth";
+import { CartProvider } from "./hooks/use-cart";
 
 function Router() {
   return (
@@ -27,10 +28,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+        <CartProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </CartProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
