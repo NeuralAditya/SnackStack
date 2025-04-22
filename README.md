@@ -11,6 +11,8 @@
 [![Issues](https://img.shields.io/github/issues/NeuralAditya/SnackStack)](https://github.com/NeuralAditya/SnackStack/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/NeuralAditya/SnackStack)](https://github.com/NeuralAditya/SnackStack/commits/main)
 
+<p align="left"> <img src="https://img.shields.io/badge/Frontend-React-blue?logo=react" alt="React"/> <img src="https://img.shields.io/badge/Build-Vite-646CFF?logo=vite" alt="Vite"/> <img src="https://img.shields.io/badge/Style-Tailwind_CSS-38B2AC?logo=tailwind-css" alt="Tailwind CSS"/> <img src="https://img.shields.io/badge/Backend-Node.js-339933?logo=node.js" alt="Node.js"/> <img src="https://img.shields.io/badge/Framework-Express.js-000000?logo=express" alt="Express.js"/> <img src="https://img.shields.io/badge/Database-PostgreSQL-4169E1?logo=postgresql" alt="PostgreSQL"/> <img src="https://img.shields.io/badge/ORM-Drizzle%20ORM-6C3483" alt="Drizzle ORM"/> <img src="https://img.shields.io/badge/Auth-Passport.js-34E27A?logo=passport" alt="Passport.js"/> <img src="https://img.shields.io/badge/Payments-Points%20System-orange" alt="Points Based System"/> <img src="https://img.shields.io/badge/Deployment-Docker-blue?logo=docker" alt="Docker"/> <img src="https://img.shields.io/badge/Hosting-Heroku%2FAWS%2FDigitalOcean-430098" alt="Heroku / AWS / DigitalOcean"/> </p>
+
 SnackStack is a campus meal ordering system and management platform, built as a **Platform as a Service (PaaS)**. It aims to streamline the process of ordering food in college campuses by providing students and staff with a seamless experience from browsing menu items to managing their orders, all while enabling campus meal providers to efficiently manage their offerings and track sales.
 
 ## Features
@@ -122,14 +124,14 @@ Please ensure your code passes the tests and follows our coding standards before
 This project is **dual-licensed**:
 
 - **GNU Affero General Public License v3.0 (AGPLv3)** – Open source under AGPLv3; see [LICENSE-AGPLv3.txt](LICENSE-AGPLv3.txt)
-- **Commercial License** – For commercial use and proprietary licensing, see [LICENSE-COMMERCIAL.txt](LICENSE-COMMERCIAL.txt) or contact Brijesh.ml.ai@gmail.com
+- **Commercial License** – For commercial use and proprietary licensing, see [LICENSE-COMMERCIAL.txt](LICENSE-COMMERCIAL.txt) 
 
 
 ## Contributors
 
-- **Aditya Arora** - [GitHub Profile](https://github.com/NeuralAditya)
+- **Aditya Arora** - [GitHub Link](https://github.com/NeuralAditya)
 - **Brijesh Gupta** - [Email For Commercial Use](mailto:brijesh.ml.ai@gmail.com)
-- **Nikhil Gupta** - [Contributor](https://github.com/nikhilgupta)
+- **Nikhil Gupta** - [Contributor & Liason](mailto:nikhilghosh898@gmail.com)
 
 ---
 
