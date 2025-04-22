@@ -59,16 +59,14 @@ app.use((req, res, next) => {
     console.log("📦 Serving static build.");
   }
 
-// Possibly what's happening
-(() => {
-  const port = process.env.PORT || 5000;
+    const port = process.env.PORT || 5000;
   server.listen({
     port,
     host: "0.0.0.0",
   }, () => {
     log(`✅ Server is listening at http://0.0.0.0:${port}`);
   });
-
+})();
 // <-- missing this closing bracket!
 })();
 
