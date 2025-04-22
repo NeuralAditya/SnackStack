@@ -2,7 +2,7 @@
   <img src="docs/assets/logo.png" alt="SnackStack Logo" width="200"/>
 </p>
 
-# SnackStack - Campus Meal Ordering & Management System
+# 🍔 SnackStack - Campus Meal Ordering & Management System
 
 [![AGPLv3 License](https://img.shields.io/badge/License-AGPLv3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 [![Commercial License](https://img.shields.io/badge/License-Commercial-lightgrey.svg)](LICENSE-COMMERCIAL.txt)
@@ -11,28 +11,39 @@
 [![Issues](https://img.shields.io/github/issues/NeuralAditya/SnackStack)](https://github.com/NeuralAditya/SnackStack/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/NeuralAditya/SnackStack)](https://github.com/NeuralAditya/SnackStack/commits/main)
 
-<p align="left"> <img src="https://img.shields.io/badge/Frontend-React-blue?logo=react" alt="React"/> <img src="https://img.shields.io/badge/Build-Vite-646CFF?logo=vite" alt="Vite"/> <img src="https://img.shields.io/badge/Style-Tailwind_CSS-38B2AC?logo=tailwind-css" alt="Tailwind CSS"/> <img src="https://img.shields.io/badge/Backend-Node.js-339933?logo=node.js" alt="Node.js"/> <img src="https://img.shields.io/badge/Framework-Express.js-000000?logo=express" alt="Express.js"/> <img src="https://img.shields.io/badge/Database-PostgreSQL-4169E1?logo=postgresql" alt="PostgreSQL"/> <img src="https://img.shields.io/badge/ORM-Drizzle%20ORM-6C3483" alt="Drizzle ORM"/> <img src="https://img.shields.io/badge/Auth-Passport.js-34E27A?logo=passport" alt="Passport.js"/> <img src="https://img.shields.io/badge/Payments-Points%20System-orange" alt="Points Based System"/> <img src="https://img.shields.io/badge/Deployment-Docker-blue?logo=docker" alt="Docker"/> <img src="https://img.shields.io/badge/Hosting-Heroku%2FAWS%2FDigitalOcean-430098" alt="Heroku / AWS / DigitalOcean"/> </p>
+<p align="left"> 
+  <img src="https://img.shields.io/badge/Frontend-React-blue?logo=react" alt="React"/> 
+  <img src="https://img.shields.io/badge/Build-Vite-646CFF?logo=vite" alt="Vite"/> 
+  <img src="https://img.shields.io/badge/Style-Tailwind_CSS-38B2AC?logo=tailwind-css" alt="Tailwind CSS"/> 
+  <img src="https://img.shields.io/badge/Backend-Node.js-339933?logo=node.js" alt="Node.js"/> 
+  <img src="https://img.shields.io/badge/Framework-Express.js-000000?logo=express" alt="Express.js"/> 
+  <img src="https://img.shields.io/badge/Database-PostgreSQL-4169E1?logo=postgresql" alt="PostgreSQL"/> 
+  <img src="https://img.shields.io/badge/ORM-Drizzle%20ORM-6C3483" alt="Drizzle ORM"/> 
+  <img src="https://img.shields.io/badge/Auth-Passport.js-34E27A?logo=passport" alt="Passport.js"/> 
+  <img src="https://img.shields.io/badge/Payments-Points%20System-orange" alt="Points Based System"/> 
+  <img src="https://img.shields.io/badge/Deployment-Docker-blue?logo=docker" alt="Docker"/> 
+  <img src="https://img.shields.io/badge/Hosting-Heroku%2FAWS%2FDigitalOcean-430098" alt="Heroku / AWS / DigitalOcean"/> 
+</p>
 
-SnackStack is a campus meal ordering system and management platform, built as a **Platform as a Service (PaaS)**. It aims to streamline the process of ordering food in college campuses by providing students and staff with a seamless experience from browsing menu items to managing their orders, all while enabling campus meal providers to efficiently manage their offerings and track sales.
+🍽️ SnackStack is a campus meal ordering system and management platform, built as a **Platform as a Service (PaaS)**. It aims to streamline the process of ordering food in college campuses by providing students and staff with a seamless experience from browsing menu items to managing their orders, all while enabling campus meal providers to efficiently manage their offerings and track sales.
 
-## Features
+## 🚀 Features
 
-- **Points System**: Operate on a points-based system; points can be easily purchased at your nearest canteen.
+- 💳 **Points System**: Operate on a points-based system; points can be easily purchased at your nearest canteen.
+- 🧑‍🎓 **Student Ordering**: Browse available meals, add items to the cart, and place orders.
+- 🧑‍🍳 **Meal Providers Dashboard**: Manage meals, pricing, and availability in real-time.
+- 📦 **Order Management**: Track order status, cancel, and update orders.
+- 💰 **Payment Integration**: Can be integrated with PalmPay/UPI, etc.
+- 🛡️ **Admin Control**: Monitor system-wide usage, manage users, and analyze sales data.
+- 🔔 **Real-time Notifications**: Get updates on meal availability, order status, and more.
 
-- **Student Ordering**: Browse available meals, add items to the cart, and place orders.
-- **Meal Providers Dashboard**: Manage meals, pricing, and availability in real-time.
-- **Order Management**: Track order status, cancel, and update orders.
-- **Payment Integration**: Can be integrated with PalmPay/UPI, etc.
-- **Admin Control**: Monitor system-wide usage, manage users, and analyze sales data.
-- **Real-time Notifications**: Get updates on meal availability, order status, and more.
-
-## Screenshots
+## 📸 Screenshots
 
 ![Home Page](docs/screenshots/home.png)
 
 ![Order Page](docs/screenshots/order.png)
 
-## Tech Stack
+## 🧰 Tech Stack
 
 - **Frontend**: React, Vite, Tailwind CSS
 - **Backend**: Node.js, Express.js
@@ -41,9 +52,9 @@ SnackStack is a campus meal ordering system and management platform, built as a 
 - **Payment Gateway**: Points Based System for now
 - **Deployment**: Docker, Heroku / AWS / DigitalOcean (depending on preference)
 
-## Setup & Installation
+## 🛠️ Setup & Installation
 
-### Prerequisites
+### ✅ Prerequisites
 
 Ensure you have the following installed:
 
@@ -52,7 +63,7 @@ Ensure you have the following installed:
 - [PostgreSQL](https://www.postgresql.org/) (or any supported database)
 - [Docker](https://www.docker.com/) (for containerization, if preferred)
 
-### Steps to Run the Project Locally
+### 🧪 Steps to Run the Project Locally
 
 1. **Clone the repository:**
    ```bash
@@ -87,7 +98,7 @@ Ensure you have the following installed:
 
 6. **Navigate to `http://localhost:5000` to access the application.**
 
-### Database Setup
+### 🗃️ Database Setup
 
 Ensure you have PostgreSQL running locally or use a cloud service like [Heroku Postgres](https://www.heroku.com/postgres).
 
@@ -97,7 +108,7 @@ Run the migrations to set up the database schema:
 npm run db:push
 ```
 
-## Contributing
+## 🤝 Contributing
 
 We welcome contributions! If you'd like to help out, please follow the steps below:
 
@@ -119,15 +130,14 @@ We welcome contributions! If you'd like to help out, please follow the steps bel
 
 Please ensure your code passes the tests and follows our coding standards before submitting a pull request.
 
-## License
+## 📄 License
 
 This project is **dual-licensed**:
 
-- **GNU Affero General Public License v3.0 (AGPLv3)** – Open source under AGPLv3; see [LICENSE-AGPLv3.txt](LICENSE-AGPLv3.txt)
-- **Commercial License** – For commercial use and proprietary licensing, see [LICENSE-COMMERCIAL.txt](LICENSE-COMMERCIAL.txt) 
+- **GNU Affero General Public License v3.0 (AGPLv3)** – Open source under AGPLv3; see [LICENSE-AGPLv3.txt](license/LICENSE-AGPLv3.txt)
+- **Commercial License** – For commercial use and proprietary licensing, see [LICENSE-COMMERCIAL.txt](license/LICENSE-COMMERCIAL.txt)
 
-
-## Contributors
+## 👥 Contributors
 
 - **Aditya Arora** - [GitHub Link](https://github.com/NeuralAditya)
 - **Brijesh Gupta** - [Email For Commercial Use](mailto:brijesh.ml.ai@gmail.com)
