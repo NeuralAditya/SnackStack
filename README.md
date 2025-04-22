@@ -1,11 +1,12 @@
-
-![SnackStack Logo](docs/assets/logo.png)
+<p align="center">
+  <img src="docs/assets/logo.png" alt="SnackStack Logo" width="200"/>
+</p>
 
 # SnackStack - Campus Meal Ordering & Management System
 
 [![AGPLv3 License](https://img.shields.io/badge/License-AGPLv3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 [![Commercial License](https://img.shields.io/badge/License-Commercial-lightgrey.svg)](LICENSE-COMMERCIAL.txt)
-[![SnackStack][![SnackStack](https://img.shields.io/badge/-SnackStack-2ECC71?style=flat-square)](https://github.com/NeuralAditya/SnackStack)
+[![SnackStack](https://img.shields.io/badge/-SnackStack-2ECC71?style=flat-square)](https://github.com/NeuralAditya/SnackStack)
 [![Contributors](https://img.shields.io/github/contributors/NeuralAditya/SnackStack)](https://github.com/NeuralAditya/SnackStack/graphs/contributors)
 [![Issues](https://img.shields.io/github/issues/NeuralAditya/SnackStack)](https://github.com/NeuralAditya/SnackStack/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/NeuralAditya/SnackStack)](https://github.com/NeuralAditya/SnackStack/commits/main)
@@ -19,7 +20,7 @@ SnackStack is a campus meal ordering system and management platform, built as a 
 - **Student Ordering**: Browse available meals, add items to the cart, and place orders.
 - **Meal Providers Dashboard**: Manage meals, pricing, and availability in real-time.
 - **Order Management**: Track order status, cancel, and update orders.
-- **Payment Integration**: Secure online payments for orders.
+- **Payment Integration**: Can be integrated with PalmPay/UPI, etc.
 - **Admin Control**: Monitor system-wide usage, manage users, and analyze sales data.
 - **Real-time Notifications**: Get updates on meal availability, order status, and more.
 
@@ -35,7 +36,7 @@ SnackStack is a campus meal ordering system and management platform, built as a 
 - **Backend**: Node.js, Express.js
 - **Database**: PostgreSQL (with Drizzle ORM)
 - **Authentication**: Passport.js (Local Strategy)
-- **Payment Gateway**: [Insert your choice of gateway here]
+- **Payment Gateway**: Points Based System for now
 - **Deployment**: Docker, Heroku / AWS / DigitalOcean (depending on preference)
 
 ## Setup & Installation
@@ -53,7 +54,7 @@ Ensure you have the following installed:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/SnackStack.git
+   git clone https://github.com/NeuralAditya/SnackStack.git
    cd SnackStack
    ```
 
@@ -126,9 +127,9 @@ This project is **dual-licensed**:
 
 ## Contributors
 
-- **Aditya Arora** - [GitHub Profile](https://github.com/adityaarora)
-- **Brijesh Gupta** - [GitHub Profile](https://github.com/brijeshgupta)
-- **Nikhil Gupta** - [GitHub Profile](https://github.com/nikhilgupta)
+- **Aditya Arora** - [GitHub Profile](https://github.com/NeuralAditya)
+- **Brijesh Gupta** - [Email For Commercial Use](mailto:brijesh.ml.ai@gmail.com)
+- **Nikhil Gupta** - [Contributor](https://github.com/nikhilgupta)
 
 ---
 
