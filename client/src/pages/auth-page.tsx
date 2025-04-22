@@ -87,7 +87,7 @@ export default function AuthPage() {
           <Card className="w-full">
             <CardHeader className="space-y-1">
               <div className="flex justify-center mb-4">
-                <MdRestaurant className="text-primary text-5xl" />
+              <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
               </div>
               <CardTitle className="text-2xl text-center">SnackStack</CardTitle>
               <CardDescription className="text-center">
@@ -349,8 +349,8 @@ export default function AuthPage() {
             </div>
           </div>
           <img 
-            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-            alt="Campus restaurant"
+            src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVhbHRoeSUyMGJvd2x8ZW58MHx8MHx8fDA%3D"
+            alt="Healthy bowl"
             className="mt-8 rounded-xl shadow-lg"
           />
         </div>

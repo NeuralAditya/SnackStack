@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import { useAuth } from "@/hooks/use-auth";
 import { useMeals } from "@/hooks/use-meals";
@@ -72,6 +72,77 @@ export default function AdminPage() {
   const { user } = useAuth();
   const { meals, isLoading } = useMeals();
   const [activeTab, setActiveTab] = useState("meals");
+  const [users, setUsers] = useState([]);
+
+  // Fetch users when admin switches to users tab
+  useEffect(() => {
+    if (activeTab === "users") {
+      fetchUsers();
+    }
+  }, [activeTab]);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("/api/admin/users", {
+        credentials: "include"
+      });
+      if (!response.ok) throw new Error("Failed to fetch users");
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to fetch users",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleRoleChange = async (userId: number, isAdmin: boolean) => {
+    try {
+      const response = await fetch(`/api/admin/users/${userId}/role`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ isAdmin })
+      });
+      if (!response.ok) throw new Error("Failed to update user role");
+      fetchUsers(); // Refresh users list
+      toast({
+        title: "Success",
+        description: "User role updated successfully",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update user role",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDeleteUser = async (userId: number) => {
+    if (!confirm("Are you sure you want to delete this user?")) return;
+
+    try {
+      const response = await fetch(`/api/admin/users/${userId}`, {
+        method: "DELETE",
+        credentials: "include"
+      });
+      if (!response.ok) throw new Error("Failed to delete user");
+      fetchUsers(); // Refresh users list
+      toast({
+        title: "Success",
+        description: "User deleted successfully",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to delete user",
+        variant: "destructive",
+      });
+    }
+  };
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [editingMeal, setEditingMeal] = useState<Meal | null>(null);
   const { toast } = useToast();
@@ -133,6 +204,7 @@ export default function AdminPage() {
         ...data,
         tags: typeof data.tags === "string" ? data.tags.split(",").map(tag => tag.trim()) : data.tags,
         allergens: typeof data.allergens === "string" ? data.allergens.split(",").map(allergen => allergen.trim()) : data.allergens,
+        id: editingMeal?.id // Include the meal ID when editing
       };
 
       if (editingMeal) {
@@ -150,10 +222,10 @@ export default function AdminPage() {
           description: `${data.name} has been added to the menu.`,
         });
       }
-      
+
       // Refresh meals data
       queryClient.invalidateQueries({ queryKey: ["/api/meals"] });
-      
+
       // Reset form and close dialog
       form.reset();
       setEditingMeal(null);
@@ -169,20 +241,20 @@ export default function AdminPage() {
 
   const openEditDialog = (meal: Meal) => {
     setEditingMeal(meal);
-    
+
     // Set form values with current meal data
     form.reset({
       ...meal,
       tags: Array.isArray(meal.tags) ? meal.tags : [],
       allergens: Array.isArray(meal.allergens) ? meal.allergens : [],
     });
-    
+
     setIsAddDialogOpen(true);
   };
 
   const handleDeleteMeal = async (mealId: number) => {
     if (!confirm("Are you sure you want to delete this meal?")) return;
-    
+
     try {
       await apiRequest("DELETE", `/api/meals/${mealId}`);
       toast({
@@ -219,7 +291,7 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-8 flex-grow">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -237,14 +309,14 @@ export default function AdminPage() {
             </Button>
           )}
         </div>
-        
+
         <Tabs value={activeTab} onValueChange={handleTabChange}>
           <TabsList className="mb-6">
             <TabsTrigger value="meals">Meals</TabsTrigger>
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="meals">
             <Card>
               <CardHeader>
@@ -318,7 +390,7 @@ export default function AdminPage() {
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="orders">
             <Card>
               <CardHeader>
@@ -397,79 +469,107 @@ export default function AdminPage() {
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="users">
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-                  <UserCheck className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">1,245</div>
-                  <p className="text-xs text-muted-foreground">
-                    +12% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-                  <UserCheck className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">842</div>
-                  <p className="text-xs text-muted-foreground">
-                    +8% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Orders</CardTitle>
-                  <Package className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">2,543</div>
-                  <p className="text-xs text-muted-foreground">
-                    +15% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Points Spent</CardTitle>
-                  <CreditCard className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">456,250</div>
-                  <p className="text-xs text-muted-foreground">
-                    +12% from last month
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-            
-            <Card className="mt-6">
+            <Card>
               <CardHeader>
                 <CardTitle>User Management</CardTitle>
-                <CardDescription>View and manage campus users.</CardDescription>
+                <CardDescription>View and manage all users in the system.</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8 text-gray-500">
-                  <Clipboard className="h-12 w-12 mx-auto mb-4 opacity-30" />
-                  <p className="text-lg font-medium mb-2">User Management Coming Soon</p>
-                  <p>This feature is under development. Check back later for updates.</p>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Username</TableHead>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Points</TableHead>
+                        <TableHead>Role</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {users?.map((user) => (
+                        <TableRow key={user.id}>
+                          <TableCell>{user.username}</TableCell>
+                          <TableCell>{user.firstName} {user.lastName}</TableCell>
+                          <TableCell>{user.points}</TableCell>
+                          <TableCell>
+                            <Select 
+                              defaultValue={user.isAdmin ? "admin" : "user"}
+                              onValueChange={(value) => handleRoleChange(user.id, value === "admin")}
+                            >
+                              <SelectTrigger className="w-32">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="user">User</SelectItem>
+                                <SelectItem value="admin">Admin</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </TableCell>
+                          <TableCell>
+                            <Button 
+                              variant="ghost" 
+                              size="sm"
+                              onClick={() => handleDeleteUser(user.id)}
+                              className="text-red-500"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 </div>
               </CardContent>
             </Card>
+
+            <div className="grid gap-4 md:grid-cols-3 mt-6">
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Active Users</CardTitle>
+                    <UserCheck className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">842</div>
+                    <p className="text-xs text-muted-foreground">
+                      +8% from last month
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Total Orders</CardTitle>
+                    <Package className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">2,543</div>
+                    <p className="text-xs text-muted-foreground">
+                      +15% from last month
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Points Spent</CardTitle>
+                    <CreditCard className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">456,250</div>
+                    <p className="text-xs text-muted-foreground">
+                      +12% from last month
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
           </TabsContent>
         </Tabs>
       </main>
-      
+
       {/* Dialog for adding/editing meals */}
       <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -481,7 +581,7 @@ export default function AdminPage() {
                 : "Add a new meal to the campus menu."}
             </DialogDescription>
           </DialogHeader>
-          
+
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -498,7 +598,7 @@ export default function AdminPage() {
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="pointCost"
@@ -518,7 +618,7 @@ export default function AdminPage() {
                   )}
                 />
               </div>
-              
+
               <FormField
                 control={form.control}
                 name="description"
@@ -536,7 +636,7 @@ export default function AdminPage() {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="imageUrl"
@@ -553,7 +653,7 @@ export default function AdminPage() {
                   </FormItem>
                 )}
               />
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -578,7 +678,7 @@ export default function AdminPage() {
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="restaurantName"
@@ -593,7 +693,7 @@ export default function AdminPage() {
                   )}
                 />
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -608,7 +708,7 @@ export default function AdminPage() {
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="tags"
@@ -631,7 +731,7 @@ export default function AdminPage() {
                   )}
                 />
               </div>
-              
+
               <div className="space-y-4">
                 <h3 className="font-medium">Nutrition Information</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -653,7 +753,7 @@ export default function AdminPage() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="nutritionInfo.protein"
@@ -672,7 +772,7 @@ export default function AdminPage() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="nutritionInfo.carbs"
@@ -691,7 +791,7 @@ export default function AdminPage() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="nutritionInfo.fat"
@@ -712,7 +812,7 @@ export default function AdminPage() {
                   />
                 </div>
               </div>
-              
+
               <FormField
                 control={form.control}
                 name="allergens"
@@ -734,7 +834,7 @@ export default function AdminPage() {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="isAvailable"
@@ -757,7 +857,7 @@ export default function AdminPage() {
                   </FormItem>
                 )}
               />
-              
+
               <DialogFooter>
                 <Button type="button" variant="outline" onClick={() => setIsAddDialogOpen(false)}>
                   Cancel

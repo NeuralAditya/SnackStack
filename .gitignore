@@ -1,6 +1,51 @@
-node_modules
-dist
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Vite cache
+.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System files
 .DS_Store
-server/public
-vite.config.ts.*
-*.tar.gz
+Thumbs.db
+
+# Env files
+.env
+.env.*
+
+# TypeScript cache
+*.tsbuildinfo
+
+# VS Code settings
+.vscode/
+
+# Replit-specific files
+.replit
+
+# Coverage outputs
+coverage/
+
+# lockfiles (optional to ignore, but common to commit for reproducible builds)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Temporary files
+*.log
+*.tmp
+*.swp
+
+# Output icons or generated assets
+generated-icon.png
+
+# Database/migration tools (if storing local db copies or outputs)
+.drizzle/

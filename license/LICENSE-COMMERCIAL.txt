@@ -1,0 +1,42 @@
+COMMERCIAL LICENSE AGREEMENT
+
+This Commercial License Agreement (the "Agreement") is between SnackStack ("Licensor"), and the Licensee ("Licensee"), who is acquiring the right to use SnackStack, a campus meal ordering system and management platform, for commercial purposes.
+
+1. **Grant of License**: Licensor grants Licensee a non-exclusive, non-transferable license to use, modify, and distribute SnackStack in a proprietary form under the terms set forth in this Agreement. This license permits usage for commercial purposes, including integration into a hosted platform for Universities, Colleges, and other institutions.
+
+2. **License Fees**: 
+   - Licensee shall pay the agreed-upon fees as defined in the accompanying order form or sales agreement. 
+   - All payments are due annually or as otherwise stated in the order form.
+   
+3. **Usage Restrictions**:
+   - Licensee is prohibited from redistributing the Software under a free license or sublicensing it in any form unless expressly allowed under this Agreement.
+   - Licensee must not remove, alter, or obscure any proprietary notices from the Software.
+   - Licensee is prohibited from using the Software in any unlawful manner.
+
+4. **Support and Maintenance**:
+   - Licensor provides commercial support, maintenance, and updates for the Software as per the terms of the support agreement, which may be purchased separately.
+   - Licensor will provide reasonable technical assistance to Licensee for integration and deployment of the Software.
+
+5. **Intellectual Property Rights**:
+   - Licensor retains all intellectual property rights related to the Software, including all updates, modifications, and enhancements made available under this Agreement.
+   - Licensee does not acquire any ownership rights to the Software, its source code, or any related intellectual property.
+
+6. **Warranty Disclaimer**: 
+   - The Software is provided "as-is" without warranty of any kind, either express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, or non-infringement.
+   - Licensor does not warrant that the Software will be error-free or meet all of the Licensee's requirements.
+
+7. **Indemnification**:
+   - Licensee agrees to indemnify and hold harmless Licensor from any claims, damages, or liabilities arising from the Licensee's use of the Software, including any third-party claims related to intellectual property infringement.
+
+8. **Termination**:
+   - This Agreement will terminate immediately if Licensee breaches any of the terms herein. Upon termination, Licensee must cease all use of the Software and destroy all copies.
+
+9. **Governing Law**:
+   - This Agreement shall be governed by and construed in accordance with the laws of Maharashtra,India.
+
+10. **Contact Information**:
+   - For commercial licensing inquiries, support, and additional terms, please contact us at: 
+     [Email: ds.adityaarora@gmai.com]
+     [Email: brijesh.ml.ai@gmail.com]
+     
+By using the Software under this Commercial License, you agree to the terms outlined in this Agreement.

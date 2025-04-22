@@ -1,0 +1,68 @@
+# Core server dependencies
+express
+express-session
+memorystore
+connect-pg-simple
+pg
+passport
+passport-local
+dotenv
+drizzle-orm
+drizzle-zod
+zod
+zod-validation-error
+
+# Type safety & validation
+zod
+
+# Frontend libraries
+react
+react-dom
+react-hook-form
+@tanstack/react-query
+@radix-ui/react-*
+framer-motion
+lucide-react
+recharts
+wouter
+cmdk
+embla-carousel-react
+react-icons
+react-day-picker
+react-resizable-panels
+next-themes
+input-otp
+vaul
+
+# Tailwind & styling
+tailwindcss
+@tailwindcss/vite
+@tailwindcss/typography
+tailwind-merge
+tailwindcss-animate
+tw-animate-css
+clsx
+class-variance-authority
+
+# Build & tooling
+vite
+tsx
+esbuild
+typescript
+postcss
+autoprefixer
+cross-env
+@vitejs/plugin-react
+
+# Replit plugins (if hosted there)
+@replit/vite-plugin-runtime-error-modal
+@replit/vite-plugin-cartographer
+@replit/vite-plugin-shadcn-theme-json
+
+# WebSocket support
+ws
+bufferutil (optional)
+
+# Utilities
+date-fns
+crypto

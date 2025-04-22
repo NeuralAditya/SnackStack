@@ -117,7 +117,7 @@ export default function HomePage() {
             <div className="md:w-1/2 relative">
               <div className="bg-white p-3 rounded-xl shadow-xl transform -rotate-2">
                 <img 
-                  src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                  src="https://plus.unsplash.com/premium_photo-1698867576619-6fb9faf28e64?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                   alt="Delicious campus meal" 
                   className="rounded-lg w-full h-64 object-cover"
                 />

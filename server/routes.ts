@@ -40,11 +40,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const mealId = parseInt(req.params.id);
       const meal = await storage.getMealById(mealId);
-      
+
       if (!meal) {
         return res.status(404).json({ message: "Meal not found" });
       }
-      
+
       res.json(meal);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch meal" });
@@ -76,7 +76,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.put("/api/meals/:id", isAdmin, async (req, res) => {
     try {
       const mealId = parseInt(req.params.id);
-      const meal = await storage.updateMeal(mealId, req.body);
+      const { id, ...mealData } = req.body; // Remove id from update data
+      const meal = await storage.updateMeal(mealId, mealData);
+      if (!meal) {
+        return res.status(404).json({ message: "Meal not found" });
+      }
       res.json(meal);
     } catch (error) {
       res.status(500).json({ message: "Failed to update meal" });
@@ -88,11 +92,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const mealId = parseInt(req.params.id);
       const result = await storage.deleteMeal(mealId);
-      
+
       if (!result) {
         return res.status(404).json({ message: "Meal not found" });
       }
-      
+
       res.status(204).send();
     } catch (error) {
       res.status(500).json({ message: "Failed to delete meal" });
@@ -104,11 +108,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = req.user!.id;
       const cart = await storage.getCart(userId);
-      
+
       if (!cart) {
         return res.status(404).json({ message: "Cart not found" });
       }
-      
+
       res.json(cart);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch cart" });
@@ -120,17 +124,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = req.user!.id;
       const { mealId, quantity } = req.body;
-      
+
       const schema = z.object({
         mealId: z.number(),
         quantity: z.number().min(1).max(10)
       });
-      
+
       const result = schema.safeParse(req.body);
       if (!result.success) {
         return res.status(400).json({ message: "Invalid input" });
       }
-      
+
       const cartItem = await storage.addToCart(userId, mealId, quantity);
       res.status(201).json(cartItem);
     } catch (error) {
@@ -143,16 +147,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const cartItemId = parseInt(req.params.id);
       const { quantity } = req.body;
-      
+
       const schema = z.object({
         quantity: z.number().min(1).max(10)
       });
-      
+
       const result = schema.safeParse(req.body);
       if (!result.success) {
         return res.status(400).json({ message: "Invalid quantity" });
       }
-      
+
       const cartItem = await storage.updateCartItem(cartItemId, quantity);
       res.json(cartItem);
     } catch (error) {
@@ -165,11 +169,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const cartItemId = parseInt(req.params.id);
       const result = await storage.removeFromCart(cartItemId);
-      
+
       if (!result) {
         return res.status(404).json({ message: "Cart item not found" });
       }
-      
+
       res.status(204).send();
     } catch (error) {
       res.status(500).json({ message: "Failed to remove from cart" });
@@ -192,29 +196,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = req.user!.id;
       const { pickupTime, specialInstructions } = req.body;
-      
+
       // Get the user's cart
       const cart = await storage.getCart(userId);
       if (!cart || cart.items.length === 0) {
         return res.status(400).json({ message: "Cart is empty" });
       }
-      
+
       // Calculate total points
       const totalPoints = cart.items.reduce(
         (sum, item) => sum + (item.meal.pointCost * item.quantity),
         0
       );
-      
+
       // Check if user has enough points
       const user = await storage.getUser(userId);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-      
+
       if (user.points < totalPoints) {
         return res.status(400).json({ message: "Not enough points" });
       }
-      
+
       // Create the order
       const orderData = {
         userId,
@@ -223,12 +227,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         specialInstructions,
         status: "pending"
       };
-      
+
       const orderSchema = insertOrderSchema.safeParse(orderData);
       if (!orderSchema.success) {
         return res.status(400).json({ message: "Invalid order data" });
       }
-      
+
       const order = await storage.createOrder(orderData, cart.items);
       res.status(201).json(order);
     } catch (error) {
@@ -257,21 +261,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get all users (admin only)
+  app.get("/api/admin/users", isAdmin, async (req, res) => {
+    try {
+      const users = await storage.getAllUsers();
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch users" });
+    }
+  });
+
   // Get a single order
   app.get("/api/orders/:id", isAuthenticated, async (req, res) => {
     try {
       const orderId = parseInt(req.params.id);
       const order = await storage.getOrderById(orderId);
-      
+
       if (!order) {
         return res.status(404).json({ message: "Order not found" });
       }
-      
+
       // Check if the user is authorized to view this order
       if (order.userId !== req.user!.id && !req.user!.isAdmin) {
         return res.status(403).json({ message: "Forbidden" });
       }
-      
+
       res.json(order);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch order" });
@@ -283,16 +297,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const orderId = parseInt(req.params.id);
       const order = await storage.getOrderById(orderId);
-      
+
       if (!order) {
         return res.status(404).json({ message: "Order not found" });
       }
-      
+
       // Check if the user is authorized to view this order
       if (order.userId !== req.user!.id && !req.user!.isAdmin) {
         return res.status(403).json({ message: "Forbidden" });
       }
-      
+
       const items = await storage.getOrderItems(orderId);
       res.json(items);
     } catch (error) {
@@ -305,11 +319,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const orderId = parseInt(req.params.id);
       const { status } = req.body;
-      
+
       if (!["pending", "preparing", "ready", "completed", "cancelled"].includes(status)) {
         return res.status(400).json({ message: "Invalid status" });
       }
-      
+
       const order = await storage.updateOrderStatus(orderId, status);
       res.json(order);
     } catch (error) {

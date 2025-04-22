@@ -111,9 +111,11 @@ export default function Header({ searchQuery = "", onSearchChange = () => {} }: 
                     <span>My Profile</span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Clock className="mr-2 h-4 w-4" />
-                  <span>Order History</span>
+                <DropdownMenuItem asChild>
+                  <Link href="/orders" className="cursor-pointer">
+                    <Clock className="mr-2 h-4 w-4" />
+                    <span>Order History</span>
+                  </Link>
                 </DropdownMenuItem>
                 {user?.isAdmin && (
                   <DropdownMenuItem asChild>
