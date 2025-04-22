@@ -59,11 +59,11 @@ app.use((req, res, next) => {
     console.log("📦 Serving static build.");
   }
 
-  const port = 5000;
-  server.listen({
-    port,
-    host: "127.0.0.1",
-  }, () => {
-    log(`✅ Server is listening at http://127.0.0.1:${port}`);
-  });
-})();
+    const port = process.env.PORT || 5000;
+    server.listen({
+      port,
+      host: "0.0.0.0",
+}, () => {
+      log(`✅ Server is listening at http://0.0.0.0:${port}`);
+});
+
