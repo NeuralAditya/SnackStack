@@ -66,3 +66,4 @@ server.listen({
 }, () => {
   log(`✅ Server is listening at http://0.0.0.0:${port}`);
 });
+})();
